@@ -7,3 +7,5 @@ pydantic==2.5.3
 pydantic-settings==2.0.3
 requests==2.31.0
 aiofiles==23.2.1
+cryptography==41.0.7     # ✅ khóa bản cũ, tránh maturin
+httpx==0.25.2            # ✅ tránh bản mới dùng rustls
