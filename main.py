@@ -68,3 +68,21 @@ def redirect_frontend(folder: str, path: str, request: Request):
         return RedirectResponse(url=f"/Frontend/{folder}/{path}")
 
     return {"detail": "Not Found"}
+# ============================================================
+# 📎 API UPLOAD FILE
+# ============================================================
+from fastapi import UploadFile, File
+import shutil, os
+
+UPLOAD_DIR = "Backend/uploads"
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+@app.post("/upload")
+async def upload_file(file: UploadFile = File(...)):
+    file_path = os.path.join(UPLOAD_DIR, file.filename)
+    with open(file_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+    return {"url": f"/uploads/{file.filename}"}
+
+# Cho phép truy cập file qua URL
+app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")

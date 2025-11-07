@@ -16,3 +16,4 @@ class Forum(Base):
 
     members = relationship("Membership", back_populates="forum", cascade="all, delete")
     messages = relationship("Message", back_populates="forum")
+    likes = relationship("Like", back_populates="forum", cascade="all, delete")

@@ -20,3 +20,4 @@ class User(Base):
     forums_joined = relationship("Membership", back_populates="user", cascade="all, delete")
     posts = relationship("Post", back_populates="user", cascade="all, delete-orphan")
     messages = relationship("Message", back_populates="user")
+    likes = relationship("Like", back_populates="user", cascade="all, delete")
