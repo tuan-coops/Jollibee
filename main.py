@@ -18,8 +18,12 @@ FRONTEND_DIR = os.path.join(BASE_DIR, "../Frontend")
 print("📂 Đường dẫn Frontend:", FRONTEND_DIR)
 
 # 🟢 Mount thư mục Frontend & static
-app.mount("/Frontend", StaticFiles(directory=FRONTEND_DIR), name="frontend")
-app.mount("/static", StaticFiles(directory="static"), name="static")
+if os.path.exists(FRONTEND_DIR):
+    app.mount("/Frontend", StaticFiles(directory=FRONTEND_DIR), name="frontend")
+
+if os.path.exists("static"):
+    app.mount("/static", StaticFiles(directory="static"), name="static")
+
 
 # ⚙️ Cho phép frontend gọi API
 app.add_middleware(
